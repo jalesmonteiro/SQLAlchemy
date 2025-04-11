@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from models import ListaDeTarefas
+from models import ListaDeTarefas, Tarefa
 import os
 import time
 
@@ -10,6 +10,7 @@ def limpar_tela():
 def main():
     # Configuração do banco de dados
     engine = create_engine("sqlite:///tarefas.db")
+    Tarefa.__table__.create(bind=engine, checkfirst=True)
     Session = sessionmaker(bind=engine)
     session = Session()
 
